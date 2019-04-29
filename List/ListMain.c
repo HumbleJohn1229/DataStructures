@@ -9,7 +9,9 @@ int main()
 	push_index(list, 2, 2);
 	push_index(list, 1, 0);
 	push_index(list, 2, 1);
-	printf("%d", findIndexByData(list, 2));
+	
 
+	int a = NULL;
+	printf("%d", a);
 	return 0;
 }
