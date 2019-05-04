@@ -15,10 +15,11 @@
 //변수 선언
 typedef int s_data;
 
+//flexible array member 로 인해 arr은 매 마지막으로 가야 함.
 typedef struct _stack {
-	s_data* arr;
 	int size;
 	int inx;
+	s_data arr[];
 } Stack;
 
 //함수 선언

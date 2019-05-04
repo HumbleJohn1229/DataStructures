@@ -1,10 +1,10 @@
 #include "ArrayStack.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 
 Stack* init_stack(int size) {
-	Stack* new_stack = (Stack*)malloc(sizeof(Stack));
-	new_stack->arr = (s_data*)malloc(sizeof(s_data));
+	Stack* new_stack = (Stack*)malloc(sizeof(Stack)+size*4);
 	new_stack->size = size;
 	new_stack->inx = -1;
 	return new_stack;
@@ -24,7 +24,8 @@ int is_full(Stack* stack) {
 int push(Stack* stack, s_data data) {
 	if (is_full(stack))
 		return 0;
-	(stack->arr)[(stack->inx)++] = data;
+	(stack->arr)[++(stack->inx)] = data;
+	return 1;
 }
 s_data pop(Stack* stack) {
 	if (is_empty(stack))

@@ -18,6 +18,13 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ArrayStack.c" />
+    <ClCompile Include="StackMain.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ArrayStack.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{BE9F6368-6703-4B96-B95D-E854DF77EB9D}</ProjectGuid>
@@ -122,13 +129,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Stack.c" />
-    <ClCompile Include="stack_main.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Stack.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
