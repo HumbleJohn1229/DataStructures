@@ -52,7 +52,7 @@ int val_opr(char opr) {
 
 // 두 연산자의 운선순위를 비교해주는 함수
 int cmp_opr(char opr1, char opr2) {
-	return val_opr(opr1) > val_opr(opr2);
+	return val_opr(opr1) >= val_opr(opr2);
 }
 
 // CPU에서 처리 해주는 계산 기능을 대신 사용할 목적으로 만든 sub 계산기
@@ -76,21 +76,19 @@ int cal_fi_val(char arr[]) {
 	while (arr[inx] != NULL) {
 		char tmp = arr[inx++];
 		if (is_opr(tmp)) {
-			int a = pop(stack);
-			int b = pop(stack);
 
-			// pop 해 온 것이 문자열인지 숫자인지 구별해서 처리
-			if (a > '0') a -= '0';
-			if (b > '0') b -= '0';
+			int a = pop(stack) - '0';
+			int b = pop(stack) - '0';
 
-			push(stack, subCal(tmp, a, b));
+			push(stack, subCal(tmp,b ,a ) + '0');
+
 		}
 		else {
 			push(stack, tmp);
 		}
 	}
-	int ret_tmp = pop(stack);
-	
+	int ret_tmp = pop(stack) - '0';
+	//destroy_stack(stack);
 	return ret_tmp;
 }
 
@@ -105,19 +103,18 @@ char* cvt_infix_to_postfix(char arr[], char ret_arr[], int stack_size) {
 
 		char tmp = arr[inx++];
 
-		if (is_opr(tmp)) {
-			if (is_empty(st_opr)) {
-				push(st_opr, tmp);
-			}
-			else {
-				while (cmp_opr(peek(st_opr), tmp)) {
-					ret_arr[ret_inx++] = pop(st_opr);
-				}
-				push(st_opr, tmp);
-			}
-		}
-		else {
+		if (!is_opr(tmp)) {
 			ret_arr[ret_inx++] = tmp;
+			continue;
+		}
+
+		if (is_empty(st_opr)) {
+			push(st_opr, tmp);
+		} else {
+			while (cmp_opr(peek(st_opr), tmp)) {
+				ret_arr[ret_inx++] = pop(st_opr);
+			}
+			push(st_opr, tmp);
 		}
 	}
 
@@ -133,9 +130,11 @@ char* cvt_infix_to_postfix(char arr[], char ret_arr[], int stack_size) {
 
 
 void main() {
-	char arr[10] = {'5','+','4','*','3','+','2', NULL};
+	char* arr = "3+2*5/2";
+	//char arr[10] = {'5','+','4','*','3','+','2', NULL};
 	char ret_arr[10];
 	cvt_infix_to_postfix(arr, ret_arr, 10);
 	int fiVal = cal_fi_val(ret_arr);
-	printf("%d", fiVal);
+	printf("postfix : %s\n", ret_arr);
+	printf("result : %d", fiVal);
 }
