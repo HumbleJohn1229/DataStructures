@@ -4,17 +4,24 @@
 
 
 Stack* init_stack(int size) {
-	Stack* new_stack = (Stack*)malloc(sizeof(Stack)+size*4);
+	Stack* new_stack = (Stack*)malloc(sizeof(Stack)+size*sizeof(s_data));
 	new_stack->size = size;
 	new_stack->inx = -1;
 	return new_stack;
 }
 
 int is_empty(Stack* stack) {
-	if (stack->size == 0) 
+	if (stack->inx == -1) 
 		return 1;
 	return 0;
 }
+
+/*
+int is_empty(Stack* stack) {
+
+	return stack->inx == 0;
+}
+*/
 
 int is_full(Stack* stack) {
 	if ((stack->inx + 1) == stack->size)
@@ -42,8 +49,19 @@ s_data peek(Stack* stack) {
 }
 
 // java try, catch 처럼 에러가 나는 경우 다른 값을 리턴해줄 수는 없을까?
+/*
 int destroy_stack(Stack* stack) {
-	free(stack->arr);
+	//free(stack->arr);
 	free(stack);
+	printf("stack free sucess!\n");
 	return 1;
+}
+*/
+
+int destroy_stack(Stack** stack) {
+	if (stack == NULL)
+		return;
+
+	free(*stack);
+	*stack = NULL;
 }

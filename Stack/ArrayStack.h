@@ -12,8 +12,9 @@
 - destroy_stack : 스택을 안전하게 없애준다. 안에 선언되어 있는 배열의 메모리를 해제해준다.
 */
 
+#define MAX_SIZE_ARRAY 200
 //변수 선언
-typedef int s_data;
+typedef char s_data;
 
 //flexible array member 로 인해 arr은 매 마지막으로 가야 함.
 typedef struct _stack {
@@ -21,6 +22,14 @@ typedef struct _stack {
 	int inx;
 	s_data arr[];
 } Stack;
+
+/*
+typedef struct _stack {
+	s_data arr[MAX_SIZE_ARRAY];
+	int size;
+	int inx;
+};
+*/
 
 //함수 선언
 Stack* init_stack(int);
