@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "Tree.h"
+#include "ArrayStack.h"
+
 
 Tree* make_init_tree() {
 	Tree* tree = (Tree*)malloc(sizeof(Tree));
@@ -72,11 +74,55 @@ void traverse(Node* node) {
 	printf("%d\n", node->data);
 }
 
+Node* copy_node(Node* node){
+    Node* c_node = (Node*)malloc(sizeof(Node));
+    c_node->data=node->data;
+    c_node->right=node->right;
+    c_node->left=node->left;
+}
+
 void traverse_use_for(Node* node) {
-	//Stack* stack = init_stack()
-	//while (node) {
-		
-	//}
+	Stack* stack = init_stack();
+    push(stack, copy_node(node));
+  
+	while (!is_empty(stack)){ 
+        Node* tmp = peek(stack);
+        
+        if(tmp->right == NULL && tmp->left == NULL){
+            printf("%d", pop(stack)->data);
+            free(tmp);
+            continue;
+        } 
+        
+        if(tmp->right != NULL){  
+            push(stack, copy_node(tmp->right));
+            tmp->right = NULL;    
+        }
+	    
+        if(tmp->left != NULL){
+            push(stack, copy_node(tmp->left));
+            tmp->left = NULL;
+        }
+	}
+}
+
+void traverse_use_for2(Node* node) {
+    Stack* stack = init_stack();
+    push(stack, copy_node(node));
+  
+    while (!is_empty(stack)){ 
+        Node* tmp = pop(stack);
+        printf("%d", tmp->data);
+        
+        if(tmp->right != NULL){  
+            push(stack, copy_node(tmp->right));  
+        }
+        
+        if(tmp->left != NULL){
+            push(stack, copy_node(tmp->left));
+        }
+        free(tmp);
+    }
 }
 
 void trv_destroy(Node* node) {

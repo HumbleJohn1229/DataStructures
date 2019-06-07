@@ -129,6 +129,10 @@
     <ClCompile Include="Tree.c" />
     <ClCompile Include="TreeMain.c" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ArrayStack.h" />
+    <None Include="ArrayStack.c" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
