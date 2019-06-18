@@ -3,7 +3,7 @@
 
 int main()
 {
-	// add List
+	// add List 
 	List* list = makeLinkedList();
 	push_index(list, 1, 1);
 	push_index(list, 2, 2);
