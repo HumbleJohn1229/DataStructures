@@ -123,15 +123,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Stack.h" />
     <ClInclude Include="Tree.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Stack.c" />
     <ClCompile Include="Tree.c" />
     <ClCompile Include="TreeMain.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ArrayStack.h" />
-    <None Include="ArrayStack.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
