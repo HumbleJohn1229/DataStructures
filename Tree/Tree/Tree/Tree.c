@@ -10,7 +10,7 @@ Tree* make_init_tree() {
 	return tree;
 }
 
-// # recursive -> for Ãâ·Â¸¸ recursive
+// # recursive -> for ï¿½ï¿½Â¸ï¿½ recursive
 int insert(Tree* tree, node_data data) {
 	Node* new_node = (Node*)malloc(sizeof(Node));
 	new_node->data = data;
@@ -33,7 +33,7 @@ int insert(Tree* tree, node_data data) {
 	return 1;
 };
 
-/* ÀÔ·Â ¹ÞÀº °ªÀ» Áö¿î´Ù. Ã£¾Æ¼­ Áö¿î °æ¿ì 1, Ã£Áö ¸øÇÑ °æ¿ì¿¡´Â 0À» ¹ÝÈ¯ÇÑ´Ù.*/
+/* ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½. Ã£ï¿½Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 1, Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ì¿¡ï¿½ï¿½ 0ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ñ´ï¿½.*/
 int del(Tree* tree, node_data data) {
 	Node** temp = &(tree->root);
 
@@ -119,15 +119,11 @@ void traverse_for_in(Node* node) {
 	while (!is_empty(stack)) {
 		Node* tmp = peek(stack);
 
-		if (tmp->left == pop_tmp
-			|| (tmp->left == NULL && tmp->right == NULL)) {
+		if ((tmp->left == NULL)
+			|| tmp->left == pop_tmp
+			|| (pop_tmp!=NULL && tmp->right != pop_tmp && pop_tmp->right != tmp) {
 			pop_tmp = pop(stack);
 			printf("%d\n", pop_tmp->data);
-			continue;
-		} else if (tmp->left == NULL) {
-			pop_tmp = pop(stack);
-			printf("%d\n", tmp->data);
-			push(stack, tmp->right);
 			continue;
 		}
 
@@ -136,7 +132,7 @@ void traverse_for_in(Node* node) {
 			push(stack, tmp->right);
 			push(stack, tmp);
 		}
-		push(stack, tmp->left);
+		push(stack, tmp->left); // tmp->left is not null because it's checked already.
 	}
 	destroy_stack(stack);
 }
